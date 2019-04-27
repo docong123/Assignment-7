@@ -1,64 +1,47 @@
-package Assignment7;
-import java.io.Serializable;
+package Pratical_ADF2;
 
-public class Student implements Serializable {
-        private int id;
-        private String name;
-        private byte age;
-        private String address;
-        /* điểm trung bình của sinh viên */
-        private float gpa;
+public class Student {
+    String studentID;
+    String name;
+    String address;
+    String phone;
 
-        public Student() {
-        }
+    public Student(String studentID, String name, String address, String phone) {
+        this.studentID = studentID;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+    }
 
-        public Student(int id, String name, byte age,
-                       String address, float gpa) {
-            super();
-            this.id = id;
-            this.name = name;
-            this.age = age;
-            this.address = address;
-            this.gpa = gpa;
-        }
+    public String getStudentID() {
+        return studentID;
+    }
 
-        public int getId() {
-            return id;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public String getAddress() {
+        return address;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public String getPhone() {
+        return phone;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
+    }
 
-        public byte getAge() {
-            return age;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setAge(byte age) {
-            this.age = age;
-        }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public float getGpa() {
-            return gpa;
-        }
-
-        public void setGpa(float gpa) {
-            this.gpa = gpa;
-        }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

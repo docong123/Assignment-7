@@ -1,69 +1,85 @@
-package Assignment7;
+package Pratical_ADF2;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
-    public static Scanner scanner = new Scanner(System.in);
+public class Main implements Method {
+    public static ArrayList<Student> collectionOfStudent = new ArrayList<>();
 
-    public static void main(String[] args) {
-        String choose = null;
-        boolean exit = false;
-        StudentManager studentManager = new StudentManager();
-        int studentId;
+    public void option() {
+        System.out.println("\nOption 1: Add student record");
+        System.out.println("Option 2: Display student record");
+        System.out.println("Option 3: Save");
+        System.out.println("Option 4: Exit");
+        System.out.println("Enter your option: ");
 
-        // show menu
-        showMenu();
-        while (true) {
-            choose = scanner.nextLine();
-            switch (choose) {
-                case "1":
-                    studentManager.add();
-                    break;
-                case "2":
-                    studentId = studentManager.inputId();
-                    studentManager.edit(studentId);
-                    break;
-                case "3":
-                    studentId = studentManager.inputId();
-                    studentManager.delete(studentId);
-                    break;
-                case "4":
-                    studentManager.sortStudentByGPA();
-                    break;
-                case "5":
-                    studentManager.sortStudentByName();
-                    break;
-                case "6":
-                    studentManager.show();
-                    break;
-                case "0":
-                    System.out.println("exited!");
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("invalid! please choose action in below menu:");
-                    break;
-            }
-            if (exit) {
+        Scanner sc2 = new Scanner(System.in);
+        int option = sc2.nextInt();
+        switch (option) {
+            case 1:
+                Add();
                 break;
-            }
-            // show menu
-            showMenu();
+            case 2:
+                Display();
+                break;
+            case 3:
+                Save();
+                break;
+            case 4:
+                System.exit(0);
+            default:
+                System.out.println("No suitable option");
+                option();
+                break;
         }
     }
 
-    /**
-     * create menu
-     */
-    public static void showMenu() {
-        System.out.println("-----------menu------------");
-        System.out.println("1. Add student.");
-        System.out.println("2. Edit student by id.");
-        System.out.println("3. Delete student by id.");
-        System.out.println("4. Sort student by gpa.");
-        System.out.println("5. Sort student by name.");
-        System.out.println("6. Show student.");
-        System.out.println("0. exit.");
-        System.out.println("---------------------------");
-        System.out.print("Please choose: ");
+    public void Add() {
+        Scanner sc1 = new Scanner(System.in);
+        System.out.println("Enter student ID");
+        String id = sc1.nextLine();
+        System.out.println("Enter student name");
+        String name = sc1.nextLine();
+        System.out.println("Enter student address");
+        String address = sc1.nextLine();
+        System.out.println("Enter student phone");
+        String phone = sc1.nextLine();
+
+        Student student = new Student(id, name, address, phone);
+        collectionOfStudent.add(student);
+        option();
+    }
+
+    public void Display() {
+        for (Student st : collectionOfStudent) {
+            System.out.println("ID: " + st.studentID + " ,Name: " + st.name + " ,Address: " + st.address + " ,Phone: " + st.phone);
+        }
+        option();
+    }
+
+    public void Save() {
+        try {
+            PrintWriter out = new PrintWriter("student.txt");
+            for (Student st : collectionOfStudent) {
+                out.println("ID: " + st.studentID + " ,Name: " + st.name + " ,Address: " + st.address + " ,Phone: " + st.phone);
+            }
+            out.close();
+        } catch (Exception e) {
+
+        }
+        option();
+    }
+
+
+    public static void main(String arg[]) {
+        Student student1 = new Student("B01010", "Nguyen Tuan Anh", "Ha Noi", "0904818238");
+        Student student2 = new Student("B10394", "Nguyen Hoang Hai", "Hai Duong", "0494949494");
+
+        Main menu = new Main();
+
+        collectionOfStudent.add(student1);
+        collectionOfStudent.add(student2);
+
+        menu.option();
     }
 }
